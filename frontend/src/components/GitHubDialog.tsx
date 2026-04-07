@@ -91,14 +91,14 @@ export function GitHubDialog({ onLoadSpace, onClose }: Props) {
         }
         const obj = data as Record<string, unknown>;
         if (obj.elements || obj.resourceType === "StructureDefinition") {
-          if (!obj.id) (obj as LogicalModel).id = `model-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-          models.push(obj as LogicalModel);
+          if (!obj.id) obj.id = `model-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+          models.push(obj as unknown as LogicalModel);
         } else if (obj.concepts || obj.resourceType === "ValueSet") {
-          if (!obj.id) (obj as ValueSetDef).id = `vs-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-          valueSets.push(obj as ValueSetDef);
+          if (!obj.id) obj.id = `vs-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+          valueSets.push(obj as unknown as ValueSetDef);
         } else if (obj.models && obj.valueSets) {
-          models.push(...(obj as { models: LogicalModel[] }).models);
-          valueSets.push(...(obj as { valueSets: ValueSetDef[] }).valueSets);
+          models.push(...(obj as unknown as { models: LogicalModel[] }).models);
+          valueSets.push(...(obj as unknown as { valueSets: ValueSetDef[] }).valueSets);
         }
       }
 

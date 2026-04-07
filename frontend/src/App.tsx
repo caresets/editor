@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Element, LogicalModel, Space, ValidationResult, ValueSetDef } from "./types";
 import { DiagramView } from "./components/DiagramView";
-import { ElementTree } from "./components/ElementTree";
 import { CommitDialog } from "./components/CommitDialog";
 import { GitHubDialog } from "./components/GitHubDialog";
 import { ModelTreeRoot } from "./components/ModelTreeRoot";
@@ -63,10 +62,6 @@ export function App() {
       ? space.models.find((m) => m.id === selectedItem.id) ?? null
       : null;
 
-  const selectedElement =
-    activeModel && selectedElementId
-      ? findElement(activeModel.elements, selectedElementId)
-      : null;
 
   // ---------------------------------------------------------------
   // Space mutations

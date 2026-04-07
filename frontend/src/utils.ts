@@ -209,7 +209,7 @@ export function generateModelPlantUML(model: LogicalModel, space: Space): string
   lines.push("");
 
   // Relationships from this model
-  writeModelRelationships(model, space, nameToModel, lines);
+  writeModelRelationships(model, nameToModel, lines);
 
   // VS bindings
   walkElementsForBindings(model.elements, model, space, lines);
@@ -260,7 +260,6 @@ function collectRefs(
 
 function writeModelRelationships(
   model: LogicalModel,
-  space: Space,
   nameToModel: Map<string, LogicalModel>,
   lines: string[]
 ) {
