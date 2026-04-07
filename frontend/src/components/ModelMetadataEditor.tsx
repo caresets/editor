@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { LogicalModel } from "../types";
+import { TranslateButton } from "./TranslateButton";
 
 interface Props {
   model: LogicalModel;
@@ -74,6 +75,11 @@ export function ModelMetadataEditor({ model, onChange }: Props) {
               {lang.toUpperCase()}
             </button>
           ))}
+          <TranslateButton
+            descriptions={descriptions}
+            targetLang={descTab}
+            onTranslated={(translated) => updateDescription(descTab, translated)}
+          />
         </div>
         <div className="prop-row">
           <label>Description</label>

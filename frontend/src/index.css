@@ -1018,6 +1018,30 @@ body {
   min-height: 36px;
 }
 
+/* Translate button (inside desc-tabs and inline-ed-desc-tabs) */
+.translate-btn {
+  margin-left: auto;
+  padding: 2px 8px;
+  border: 1px solid #adb5bd;
+  border-radius: 4px;
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.translate-btn:hover:not(:disabled) {
+  background: #e7f1ff;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.translate-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* Type warning */
 .type-warning {
   background: #fff3cd;

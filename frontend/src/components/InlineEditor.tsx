@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Element, LogicalModel, ValueSetDef } from "../types";
 import { FHIR_TYPES, BINDING_TYPES } from "../types";
 import { isContainerType } from "../utils";
+import { TranslateButton } from "./TranslateButton";
 
 interface Props {
   element: Element;
@@ -154,6 +155,13 @@ export function InlineEditor({ element, onChange, spaceModels, spaceValueSets }:
               {lang.toUpperCase()}
             </button>
           ))}
+          <TranslateButton
+            descriptions={element.descriptions}
+            targetLang={descTab}
+            onTranslated={(translated) =>
+              update({ descriptions: { ...element.descriptions, [descTab]: translated } })
+            }
+          />
         </div>
         <textarea
           value={element.descriptions[descTab]}
