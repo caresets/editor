@@ -1,0 +1,26 @@
+# Replace build.example.com with your actual domain
+build.example.com {
+    # Serve frontend static files
+    root * /srv/frontend
+    file_server
+
+    # Proxy API requests to FastAPI
+    handle /build* {
+        reverse_proxy localhost:8080
+    }
+    handle /sushi* {
+        reverse_proxy localhost:8080
+    }
+    handle /gofsh* {
+        reverse_proxy localhost:8080
+    }
+    handle /jekyll* {
+        reverse_proxy localhost:8080
+    }
+    handle /health* {
+        reverse_proxy localhost:8080
+    }
+    handle /validate* {
+        reverse_proxy localhost:8080
+    }
+}

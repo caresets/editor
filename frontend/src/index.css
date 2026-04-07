@@ -1,0 +1,1499 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f8f9fa;
+  --panel-bg: #fff;
+  --border: #dee2e6;
+  --primary: #0d6efd;
+  --danger: #dc3545;
+  --warn: #ffc107;
+  --text: #212529;
+  --text-muted: #6c757d;
+  --radius: 6px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ============================================================
+   Toolbar
+   ============================================================ */
+.toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.toolbar h1 {
+  font-size: 16px;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.toolbar button {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.toolbar button:hover:not(:disabled) {
+  background: var(--bg);
+}
+
+.toolbar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.toolbar button.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.toolbar button.danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.toolbar-tabs {
+  display: flex;
+  gap: 0;
+  margin-right: 8px;
+}
+
+.toolbar-tab {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.toolbar-tab:first-child {
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.toolbar-tab:last-child {
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-left: -1px;
+}
+
+.toolbar-tab:not(:first-child):not(:last-child) {
+  margin-left: -1px;
+}
+
+.toolbar-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+/* ============================================================
+   Main layout
+   ============================================================ */
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.left-panel {
+  width: 260px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  background: var(--panel-bg);
+  overflow-y: auto;
+}
+
+/* Unified content panel (replaces old property-panel for Models tab) */
+.content-panel {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+/* ============================================================
+   Space Explorer
+   ============================================================ */
+.space-explorer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border);
+}
+
+.space-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #f0f4ff;
+  border-bottom: 1px solid var(--border);
+}
+
+.space-header-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.space-icon {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.space-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.space-header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.space-header-actions button {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.space-header-actions button:hover {
+  background: var(--bg);
+}
+
+/* GitHub auth strip */
+.explorer-auth {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.gh-auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.gh-auth-user {
+  font-weight: 600;
+  color: #155724;
+  flex: 1;
+}
+
+.gh-auth-user::before {
+  content: "\25CF ";
+  color: #28a745;
+}
+
+.gh-auth-btn {
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.gh-auth-btn:hover {
+  background: var(--bg);
+}
+
+.gh-auth-pending {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.gh-auth-instructions {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.gh-auth-instructions a {
+  color: var(--primary);
+}
+
+.gh-auth-code {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: monospace;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.gh-auth-copy {
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.gh-auth-waiting {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.gh-auth-error {
+  font-size: 11px;
+  color: var(--danger);
+  margin-top: 2px;
+}
+
+.commit-btn {
+  background: #28a745 !important;
+  color: #fff !important;
+  border-color: #28a745 !important;
+}
+
+/* Commit dialog preview */
+.commit-preview {
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.commit-preview-header {
+  padding: 6px 12px;
+  background: var(--bg);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.commit-preview-file {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-family: monospace;
+  border-top: 1px solid var(--border);
+}
+
+.commit-result {
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.commit-ok {
+  background: #d4edda;
+  color: #155724;
+}
+
+.commit-err {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Explorer sections */
+.explorer-section {
+  border-bottom: 1px solid var(--border);
+}
+
+.explorer-section:last-child {
+  border-bottom: none;
+}
+
+.explorer-section-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.explorer-section-header:hover {
+  background: #e9ecef;
+}
+
+.explorer-toggle {
+  font-size: 10px;
+  color: var(--text-muted);
+  width: 14px;
+}
+
+.explorer-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.explorer-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--panel-bg);
+  padding: 0 6px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.explorer-add-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-muted);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.explorer-add-btn:hover {
+  color: var(--primary);
+}
+
+.explorer-items {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.explorer-empty {
+  padding: 8px 12px 8px 30px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.explorer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 20px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.explorer-item:hover {
+  background: var(--bg);
+}
+
+.explorer-item.selected {
+  background: #e7f1ff;
+  border-left-color: var(--primary);
+}
+
+.explorer-item-icon {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.model-icon {
+  background: #d4edda;
+  color: #155724;
+}
+
+.vs-icon {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.explorer-item-name {
+  flex: 1;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.explorer-item-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.explorer-item-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 0 2px;
+  line-height: 1;
+  opacity: 0;
+}
+
+.explorer-item:hover .explorer-item-delete {
+  opacity: 1;
+}
+
+.explorer-item-delete:hover {
+  color: var(--danger);
+}
+
+.model-status-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.3px;
+}
+
+.status-draft {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-retired {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ============================================================
+   Model Editor (unified single-panel view)
+   ============================================================ */
+.model-editor {
+  padding: 16px 24px;
+}
+
+/* Tree section inside model editor */
+.model-tree-section {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Model Diagram section (inside model editor)
+   ============================================================ */
+.model-diagram-section {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.model-diagram-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.model-diagram-header:hover {
+  background: #e9ecef;
+}
+
+.model-diagram-generate {
+  margin-left: auto;
+  padding: 3px 12px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.model-diagram-generate:hover {
+  opacity: 0.9;
+}
+
+.model-diagram-body {
+  border-top: 1px solid var(--border);
+}
+
+.model-diagram-preview {
+  padding: 16px;
+  text-align: center;
+  background: #fafbfc;
+  border-bottom: 1px solid var(--border);
+  overflow: auto;
+  max-height: 500px;
+}
+
+.model-diagram-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+.model-diagram-editor {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  font-size: 12px;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+  line-height: 1.5;
+  resize: vertical;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  min-height: 120px;
+}
+
+.model-diagram-editor:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+/* ============================================================
+   Tree action bar (above the tree)
+   ============================================================ */
+.tree-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.tree-actions-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-right: auto;
+}
+
+.tree-actions button {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.tree-actions button:hover:not(:disabled) {
+  background: #e9ecef;
+}
+
+.tree-actions button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.tree-actions button.danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* Tree content area */
+.tree-content {
+  padding: 4px 0;
+}
+
+/* ============================================================
+   Tree — continuous lines via nested border technique
+   ============================================================
+
+   The trick: .tree-children has a left border that IS the vertical
+   line. It naturally spans all children. Each child row draws a
+   short horizontal arm via ::before. The last child clips the
+   border with a negative margin-bottom on the border container.
+   ============================================================ */
+
+.tree-root {
+  padding: 4px 0 4px 8px;
+}
+
+/* Trunk row = model name as the root of the tree */
+.tree-trunk-row {
+  height: 36px;
+}
+
+.tree-trunk-name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+/* Metadata fields (shown inline under trunk when expanded) */
+.tree-trunk-meta {
+  margin-left: 10px;
+  padding: 12px 16px 8px 16px;
+  border-left: 1px solid #c0c6cc;
+  background: var(--bg);
+  border-radius: 0 0 var(--radius) 0;
+}
+
+.model-meta-fields .prop-row {
+  margin-bottom: 8px;
+}
+
+.tree-node {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tree-node-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0 10px 0 0;
+  height: 30px;
+  position: relative;
+}
+
+/* Alternating row shading */
+.tree-node:nth-child(odd) > .tree-node-row {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.tree-node-row:hover {
+  background: #edf2f7 !important;
+}
+
+.tree-node-row.selected {
+  background: #dbe9ff !important;
+}
+
+/* Horizontal arm — reaches back into the negative margin to touch
+   the parent's border-left (the vertical line). */
+.tree-arm {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #c0c6cc;
+  flex-shrink: 0;
+  margin-left: -20px;
+  margin-right: 4px;
+}
+
+.tree-children {
+  margin-left: 10px;
+  padding-left: 20px;
+  border-left: 1px solid #c0c6cc;
+}
+
+/* Last child: mask the vertical line below the arm. */
+.tree-node-last {
+  position: relative;
+}
+
+.tree-node-last::after {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 16px;
+  bottom: 0;
+  width: 1px;
+  background: var(--panel-bg);
+}
+
+/* Expand/collapse toggle — zero width for leaves */
+.tree-toggle {
+  width: 0;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 10px;
+  color: #bbb;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.tree-toggle.has-children {
+  width: 14px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.tree-toggle.has-children:hover {
+  color: var(--text);
+}
+
+/* Element name */
+.tree-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 4px 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tree-name-empty {
+  color: var(--text-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Inline rename input */
+.tree-name-input {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 1px 4px;
+  border: 1px solid var(--primary);
+  border-radius: 3px;
+  outline: none;
+  min-width: 60px;
+  background: #fff;
+}
+
+/* Meta group (type + cardinality + VS, right-aligned) */
+.tree-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+/* Type badge */
+.tree-badge {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: #eef0f2;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.tree-badge-container {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Cardinality */
+.tree-cardinality {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+}
+
+/* ValueSet binding badge */
+.tree-vs-badge {
+  font-size: 9px;
+  color: #5a4e8c;
+  background: #ede9f6;
+  padding: 1px 5px;
+  border-radius: 8px;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Property editor (right panel)
+   ============================================================ */
+.content-panel .empty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 80px;
+  padding: 0 24px;
+}
+
+.prop-section {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.prop-section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.prop-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.prop-row label {
+  width: 100px;
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.prop-row input,
+.prop-row select,
+.prop-row textarea {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.prop-row textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* ============================================================
+   Inline editor (inside tree node)
+   ============================================================ */
+.tree-inline-editor {
+  margin: 2px 0 4px 0;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background: #f5f8ff;
+  overflow: hidden;
+}
+
+.inline-ed {
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.inline-ed-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.inline-ed-row label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.inline-ed-row input,
+.inline-ed-row select {
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+.inline-ed-name {
+  flex: 1;
+  min-width: 100px;
+}
+
+.inline-ed-card {
+  width: 44px;
+}
+
+.inline-ed-dots {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.inline-ed-vs-url {
+  flex: 1;
+  min-width: 120px;
+}
+
+.inline-ed-strength {
+  width: 90px;
+}
+
+.inline-ed-warning {
+  background: #fff3cd;
+  color: #856404;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.inline-ed-warning button {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border: 1px solid #856404;
+  border-radius: 3px;
+  background: transparent;
+  color: #856404;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.inline-ed-desc {
+  margin-top: 4px;
+}
+
+.inline-ed-desc-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 4px;
+}
+
+.inline-ed-desc-tabs button {
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: var(--bg);
+  cursor: pointer;
+  font-size: 11px;
+  border-radius: 4px 4px 0 0;
+  margin-right: -1px;
+  color: var(--text-muted);
+}
+
+.inline-ed-desc-tabs button.active {
+  background: #fff;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 1px solid #fff;
+}
+
+.inline-ed-desc textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 0 4px 4px 4px;
+  font-size: 12px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 36px;
+}
+
+/* Type warning */
+.type-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffc107;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-size: 12px;
+  margin: 8px 0;
+}
+
+.fix-type-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.fix-type-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Description tabs */
+.desc-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.desc-tab {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: var(--bg);
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin-right: -1px;
+}
+
+.desc-tab.active {
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--panel-bg);
+  font-weight: 600;
+}
+
+/* Validation results */
+.validation-results {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.validation-results h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.val-item {
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.val-item.error {
+  color: var(--danger);
+}
+
+.val-item.warning {
+  color: #856404;
+}
+
+/* ============================================================
+   ValueSet Editor
+   ============================================================ */
+.valueset-editor {
+  display: flex;
+  gap: 0;
+  height: 100%;
+}
+
+.vs-sidebar {
+  width: 240px;
+  border-right: 1px solid var(--border);
+  background: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.vs-sidebar-header h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.vs-sidebar-header button {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.vs-sidebar-header button:hover {
+  background: var(--bg);
+}
+
+.vs-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.vs-list-empty {
+  padding: 16px 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.vs-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+
+.vs-list-item:hover {
+  background: var(--bg);
+}
+
+.vs-list-item.active {
+  background: #e7f1ff;
+  border-left-color: var(--primary);
+}
+
+.vs-list-item span:first-child {
+  flex: 1;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vs-concept-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.vs-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.vs-delete-btn:hover {
+  color: var(--danger);
+}
+
+.vs-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.vs-detail .empty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 80px;
+}
+
+.vs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+.vs-table th,
+.vs-table td {
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  text-align: left;
+}
+
+.vs-table th {
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.vs-table input {
+  width: 100%;
+  border: none;
+  padding: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  background: transparent;
+}
+
+.vs-table input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+  border-radius: 2px;
+}
+
+.vs-row-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.vs-row-delete:hover {
+  color: var(--danger);
+}
+
+.vs-add-concept {
+  padding: 4px 12px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.vs-add-concept:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ============================================================
+   Diagram View
+   ============================================================ */
+.diagram-view {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+}
+
+.diagram-view .empty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 80px;
+}
+
+.diagram-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.diagram-toolbar button {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.diagram-toolbar button:hover {
+  background: var(--bg);
+}
+
+.diagram-generate-btn {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+.diagram-tab-active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+
+.diagram-empty {
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 80px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.diagram-editor {
+  flex: 1;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", "Monaco", "Courier New", monospace;
+  line-height: 1.6;
+  resize: none;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  tab-size: 2;
+}
+
+.diagram-editor:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+
+.diagram-image-container {
+  flex: 1;
+  overflow: auto;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.diagram-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.diagram-fallback {
+  width: 100%;
+}
+
+.diagram-fallback p {
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* ============================================================
+   GitHub Dialog
+   ============================================================ */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.dialog {
+  background: var(--panel-bg);
+  border-radius: 12px;
+  padding: 24px;
+  width: 520px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dialog h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.dialog-form {
+  margin-bottom: 16px;
+}
+
+.dialog-browse-btn {
+  padding: 8px 20px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.dialog-browse-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.dialog-error {
+  color: var(--danger);
+  font-size: 13px;
+  padding: 8px;
+  background: #f8d7da;
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.dialog-file-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.dialog-file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dialog-file-item:last-child {
+  border-bottom: none;
+}
+
+.dialog-file-item:hover {
+  background: #e7f1ff;
+}
+
+.dialog-file-item input[type="checkbox"] {
+  flex-shrink: 0;
+}
+
+.dialog-file-group {
+  margin-bottom: 12px;
+}
+
+.dialog-file-group-header {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.dialog-file-group .dialog-file-list {
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-bottom: 0;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-actions button {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 13px;
+}

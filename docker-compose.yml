@@ -1,0 +1,13 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - fhir_cache:/root/.fhir
+    restart: unless-stopped
+    environment:
+      - PUBLISHER_JAR=/app/publisher.jar
+
+volumes:
+  fhir_cache:
